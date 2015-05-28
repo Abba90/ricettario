@@ -1,0 +1,80 @@
+<div>
+  <h1 align="center"><strong>Ricettario</strong></h1>
+  <br>
+<table style="width:100%">
+  <col width="30%">
+
+  <tr>
+    <td ALIGN="CENTER">
+      <h3>
+        <span ng-click="allIngredienti()">
+          <span ng-show="flagIngredienti" class="glyphicon glyphicon-check" aria-hidden="true"></span>
+        <span ng-hide="flagIngredienti" class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+        </span>
+        Ingredienti
+      </h3>
+    </td>
+    <td ALIGN="CENTER"> <h3 ng-init="predicate='nome';reverse = false">Ricette <span class="badge">{{ricette.length}}</span>&nbsp&nbsp
+
+      <span class="glyphicon  glyphicon-font" ng-show="predicate=='nome'" ng-click="predicate='tempo'" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-time"  ng-show="predicate=='tempo'" ng-click="predicate='nome'" aria-hidden="true"></span>
+
+      <span class="glyphicon glyphicon-chevron-up"  ng-show="reverse" ng-click="reverse=!reverse" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-chevron-down" ng-hide="reverse" ng-click="reverse=!reverse"aria-hidden="true"></span>
+    </h3></td>
+  </tr>
+  <tr>
+  <tr>
+    <td ALIGN="CENTER">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+        </span>
+        <input type="text" list="ingrd" class="form-control" ng-model="searchIngredieni" placeholder="Ingrediente" aria-describedby="basic-addon1">
+        <datalist id="ingrd">
+          <option ng-repeat="ingrdiente in ingredienti" value="{{ingrdiente}}">
+        </datalist>
+      </div>
+    </td>
+    <td ALIGN="CENTER">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+        </span>
+        <input type="text" list="rice" class="form-control" ng-model="searchRicetta"  placeholder="Nome ricetta" aria-describedby="basic-addon1">
+        <datalist id="rice">
+            <option ng-repeat="ricetta in ricette" value="{{ricetta.nome}}">
+        </datalist>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td ALIGN="left" VALIGN="TOP">
+      <div class="checkbox" ng-repeat="ingrediente in ingredienti | filter: searchIngredieni" >
+        <label >
+          <h3> <input type="checkbox"  ng-model="dispensa[$index]" ng-click="trovaRicette()">
+            <span class="label label-primary" ng-show="dispensa[$index]">{{ingrediente}}</span>
+            <span class="label label-default" ng-hide="dispensa[$index]">{{ingrediente}}</span>
+          </h3>
+        </label>
+      </div>
+    </td>
+    <td VALIGN="TOP">
+      <div class="list-group">
+        <a ng-repeat="ricetta in ricette| filter:{nome:searchRicetta}|orderBy:predicate:reverse" href="#/{{ricetta.nome}}" class="list-group-item ">
+          <h4>
+            {{ricetta.nome}}
+          </h4>
+            <p align="right">
+              {{ricetta.tempo}}<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+            </p>
+        </a>
+      </div>
+
+
+    </td>
+  </tr>
+</table>
+
+</div>
+

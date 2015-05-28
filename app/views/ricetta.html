@@ -1,0 +1,15 @@
+<h1>{{ ricetta.nome}}</h1>
+
+<span ng-repeat="ingrediente in ricetta.ingredienti"> &nbsp
+
+  <span class="label label-primary">
+    {{ingrediente.nome}} : {{getQuantita(ingrediente)}}
+  </span>
+</span>
+
+
+<h2 align="right">
+  {{ricetta.tempo}} min
+  <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+</h2>
+<p>{{ ricetta.procedimento}}</p>
